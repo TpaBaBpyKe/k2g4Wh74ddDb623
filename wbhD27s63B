@@ -701,7 +701,8 @@ local RaisedC = Players.LocalPlayer.leaderstats.Raised.value
 Players.LocalPlayer.leaderstats.Raised.Changed:Connect(function()
 	hopSet()
 	if Toggles.webhookToggleT.Value == true then
-		webhook("💰 Tip | Amount: " .. tostring(Players.LocalPlayer.leaderstats.Raised.Value - RaisedC) .. 'R$ (after tax: ' .. tostring(math.floor((Players.LocalPlayer.leaderstats.Raised.Value - RaisedC) * 0.6)) .. 'R$) | Total: ' .. tostring(Players.LocalPlayer.leaderstats.Raised.Value) .. 'R$ | Account: ' .. Players.LocalPlayer.DisplayName .. ' (' .. Players.LocalPlayer.Name .. ')')
+		--webhook("💰 Tip | Amount: " .. tostring(Players.LocalPlayer.leaderstats.Raised.Value - RaisedC) .. 'R$ (after tax: ' .. tostring(math.floor((Players.LocalPlayer.leaderstats.Raised.Value - RaisedC) * 0.6)) .. 'R$) | Total: ' .. tostring(Players.LocalPlayer.leaderstats.Raised.Value) .. 'R$ | Account: ' .. Players.LocalPlayer.DisplayName .. ' (' .. Players.LocalPlayer.Name .. ')')
+        	webhook(tostring("╔🛎Пришёл донат!🛎\n║💸 Поднято ⏣: " .. tostring(Players.LocalPlayer.leaderstats.Raised.Value - RaisedC) .. '\n║💸Всего ⏣: ' .. tostring(Players.LocalPlayer.leaderstats.Raised.Value) ..'\n╚:bust_in_silhouette:Аккаунт: ' .. Players.LocalPlayer.DisplayName .. ' (' .. Players.LocalPlayer.Name .. ')'))
 	end
 	if Toggles.serverHopAfterDonationTog.Value == true then
 		task.spawn(function()
