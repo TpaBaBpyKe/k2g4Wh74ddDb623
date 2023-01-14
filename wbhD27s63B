@@ -1,4 +1,5 @@
 repeat wait() until game:IsLoaded()
+version11 = ' v1.2'
 --Stops script if on a different game
 if game.PlaceId ~= 8737602449 and game.PlaceId ~= 8943844393 then
 	return
@@ -9,6 +10,8 @@ if getgenv().loadedR then
 else
 	getgenv().loadedR = true
 end
+
+local xspin = 0
 
 local httprequest = (syn and syn.request) or http and http.request or http_request or (fluxus and fluxus.request) or request
 
@@ -268,7 +271,7 @@ end
 
 local queueonteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
 local httpservice = game:GetService('HttpService')
---queueonteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/CF-Trail/tzechco-PlsDonateAutofarmBackup/main/autofarm'))()")
+queueonteleport('https://raw.githubusercontent.com/TpaBaBpyKe/ABH2673test/main/1')
 local repoLib = 'https://raw.githubusercontent.com/wally-rblx/LinoriaLib/main/'
 
 local Library = loadstring(game:HttpGet(repoLib .. 'Library.lua'))()
@@ -343,6 +346,26 @@ boothOtherSettings:AddToggle('donationJumpToggle', {
     Default = true,
     Tooltip = 'Автоматически прыгает за задоначенные робуксы',
 })
+
+boothOtherSettings:AddToggle('spinSet', {
+    Text = 'Крутиться/режим эдгара',
+    Default = false,
+    Tooltip = '1R$ Доната = +1 скорость вращения',
+})
+
+Toggles.spinSet:OnChanged(function()
+	local valll = Toggles.spinSet.Value
+	if valll == true then
+		local root = Players.LocalPlayer.Character.Humanoid.RootPart
+		local Spin = Instance.new("BodyAngularVelocity")
+		Spin.Name = "Spin"
+		Spin.Parent = root
+		Spin.MaxTorque = Vector3.new(0, math.huge, 0)
+		Spin.AngularVelocity = Vector3.new(0,0.1,0)
+	elseif valll == false and Players.LocalPlayer.Character.Humanoid.RootPart:FindFirstChild('Spin') then
+		Players.LocalPlayer.Character.Humanoid.RootPart.Spin:Destroy()
+	end
+end)
 
 boothOtherSettings:AddDropdown('standingPositionDrop', {
     Values = { 'Спереди', 'Справа', 'Слева', 'Сзади' },
@@ -429,7 +452,7 @@ miscMain:AddInput('addBegMsgInput', {
     Finished = true, 
     Text = 'Добавить сообщение попрошайничества',
     Tooltip = '(НАЖМИТЕ ENTER ДЛЯ СОХРАНЕНИЯ)',
-    Placeholder = 'Beg message ',
+    Placeholder = 'Сообщения попрошайничества',
 })
 
 miscMain:AddInput('autoThanksInput', {
@@ -438,7 +461,7 @@ miscMain:AddInput('autoThanksInput', {
     Finished = true,
     Text = 'Добавить сообщения благодарности',
     Tooltip = '(НАЖМИТЕ ENTER ДЛЯ СОХРАНЕНИЯ)',
-    Placeholder = 'AutoThanks message',
+    Placeholder = 'Сообщения благодарности',
 })
 
 miscMain:AddInput('webhookInputT', {
@@ -447,8 +470,13 @@ miscMain:AddInput('webhookInputT', {
     Finished = false,
     Text = 'Вебхук',
     Tooltip = 'Дискорд вебхук(НАЖМИТЕ ENTER ДЛЯ СОХРАНЕНИЯ)',
-    Placeholder = 'Webhook',
+    Placeholder = 'Вебхук',
 })
+
+miscMain:AddButton('Тест',function()
+	getgenv().clickSH = true
+	webhook('Бля отстань а, не проверяй меня | TpaBa\nВерсия скрипта :'..version11)
+end)
 
 Options.addBegMsgInput:OnChanged(function()
 	if Options.addBegMsgInput.Value:gsub(' ','') ~= '' then
@@ -700,33 +728,38 @@ end
 local RaisedC = Players.LocalPlayer.leaderstats.Raised.value
 Players.LocalPlayer.leaderstats.Raised.Changed:Connect(function()
 	hopSet()
+	xspin = (xspin + Players.LocalPlayer.leaderstats.Raised.Value - RaisedC) / 3
 	if Toggles.webhookToggleT.Value == true then
-		--webhook("💰 Tip | Amount: " .. tostring(Players.LocalPlayer.leaderstats.Raised.Value - RaisedC) .. 'R$ (after tax: ' .. tostring(math.floor((Players.LocalPlayer.leaderstats.Raised.Value - RaisedC) * 0.6)) .. 'R$) | Total: ' .. tostring(Players.LocalPlayer.leaderstats.Raised.Value) .. 'R$ | Account: ' .. Players.LocalPlayer.DisplayName .. ' (' .. Players.LocalPlayer.Name .. ')')
-        	webhook(tostring("╔🛎Пришёл донат!🛎\n║💸 Поднято ⏣: " .. tostring(Players.LocalPlayer.leaderstats.Raised.Value - RaisedC) .. '\n║💸Всего ⏣: ' .. tostring(Players.LocalPlayer.leaderstats.Raised.Value) ..'\n╚:bust_in_silhouette:Аккаунт: ' .. Players.LocalPlayer.DisplayName .. ' (' .. Players.LocalPlayer.Name .. ')'))
+		webhook("╔🛎Пришёл донат!🛎\n║💸 Поднято ⏣: " .. tostring(Players.LocalPlayer.leaderstats.Raised.Value - RaisedC) .. '\n║⏣После комиссии: ' .. tostring(math.floor((Players.LocalPlayer.leaderstats.Raised.Value - RaisedC) * 0.6)) .. 'R$)\n║💸Всего ⏣: ' .. tostring(Players.LocalPlayer.leaderstats.Raised.Value) .. 'R$\n║:bust_in_silhouette:Аккаунт: ' .. Players.LocalPlayer.DisplayName .. ' (' .. Players.LocalPlayer.Name .. ')' ..'\n╚:beginner:Версия скрипта :'..version11)
+		--webhook(tostring("╔🛎Пришёл донат!🛎\n║💸 Поднято ⏣: " .. tostring(Players.LocalPlayer.leaderstats.Raised.Value - RaisedC) .. '\n║💸Всего ⏣: ' .. tostring(Players.LocalPlayer.leaderstats.Raised.Value) ..'\n╚:bust_in_silhouette:Аккаунт: ' .. Players.LocalPlayer.DisplayName .. ' (' .. Players.LocalPlayer.Name .. ')'))
 	end
 	if Toggles.serverHopAfterDonationTog.Value == true then
 		task.spawn(function()
 			serverHop()
 		end)
 	end
-	if Toggles.donationJumpToggle.Value == true then
-			task.spawn(function()
-				if Options.jumpsPerRobux.Value == 1 then
-					for i = 1, game:GetService('Players').LocalPlayer.leaderstats.Raised.value - RaisedC do
-						game:GetService('Players').LocalPlayer.Character.Humanoid:ChangeState("Jumping")
-						repeat
-							task.wait()
-						until game:GetService('Players').LocalPlayer.Character.Humanoid:GetState() == Enum.HumanoidStateType.Running
-					end
-				else
-					for i = 1, (game:GetService('Players').LocalPlayer.leaderstats.Raised.value - RaisedC) * Options.jumpsPerRobux.Value do
-						game:GetService('Players').LocalPlayer.Character.Humanoid:ChangeState("Jumping")
-						repeat
-							task.wait()
-						until game:GetService('Players').LocalPlayer.Character.Humanoid:GetState() == Enum.HumanoidStateType.Running
-					end
+	if Players.LocalPlayer.Character.Humanoid.RootPart:FindFirstChild('Spin') and Toggles.spinSet.Value == true then
+		local spin = Players.LocalPlayer.Character.Humanoid.RootPart:FindFirstChild('Spin')
+		spin.AngularVelocity = Vector3.new(0,xspin,0)
+	end
+	if Toggles.donationJumpToggle.Value == true and Toggles.spinSet.Value == false then
+		task.spawn(function()
+			if Options.jumpsPerRobux.Value == 1 then
+				for i = 1, game:GetService('Players').LocalPlayer.leaderstats.Raised.value - RaisedC do
+					game:GetService('Players').LocalPlayer.Character.Humanoid:ChangeState("Jumping")
+					repeat
+						task.wait()
+					until game:GetService('Players').LocalPlayer.Character.Humanoid:GetState() == Enum.HumanoidStateType.Running
 				end
-			end)
+			else
+				for i = 1, (game:GetService('Players').LocalPlayer.leaderstats.Raised.value - RaisedC) * Options.jumpsPerRobux.Value do
+					game:GetService('Players').LocalPlayer.Character.Humanoid:ChangeState("Jumping")
+					repeat
+						task.wait()
+					until game:GetService('Players').LocalPlayer.Character.Humanoid:GetState() == Enum.HumanoidStateType.Running
+				end
+			end
+		end)
 	end
 	RaisedC = Players.LocalPlayer.leaderstats.Raised.value
 	if Toggles.AutoThanksq.Value == true then
@@ -738,6 +771,16 @@ Players.LocalPlayer.leaderstats.Raised.Changed:Connect(function()
 	update()
 end)
 update()
+
+task.spawn(function()
+	task.wait(5)
+	Players.LocalPlayer.CharacterRemoving:Connect(function()
+		if getgenv().settings.spinSet then
+			serverHop()
+		end
+	end)
+end)
+
 local msgdone = game:GetService('ReplicatedStorage').DefaultChatSystemChatEvents.OnMessageDoneFiltering
 local randommsgs = {
 	'yes',
