@@ -781,6 +781,17 @@ task.spawn(function()
 	end)
 end)
 
+task.spawn(function()
+	while task.wait(5) do
+		if (Players.LocalPlayer.Character and Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').RootPart) then
+			local root = Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').RootPart
+			if (root.Position - positionX.Position).Magnitude > 1000 or (root.Position - positionX.Position).Magnitude < -1000 then
+				serverHop()
+			end
+		end
+	end
+end)
+
 local msgdone = game:GetService('ReplicatedStorage').DefaultChatSystemChatEvents.OnMessageDoneFiltering
 local randommsgs = {
 	'yes',
