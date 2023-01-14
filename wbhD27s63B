@@ -279,7 +279,7 @@ local ThemeManager = loadstring(game:HttpGet(repoLib .. 'addons/ThemeManager.lua
 local SaveManager = loadstring(game:HttpGet(repoLib .. 'addons/SaveManager.lua'))()
 
 local Window = Library:CreateWindow({
-    Title = 'pls donate v1.1 | TpaBa',
+    Title = 'pls donate v1.2 | TpaBa',
     Center = true, 
     AutoShow = true,
 })
@@ -730,7 +730,7 @@ Players.LocalPlayer.leaderstats.Raised.Changed:Connect(function()
 	hopSet()
 	xspin = (xspin + Players.LocalPlayer.leaderstats.Raised.Value - RaisedC) / 3
 	if Toggles.webhookToggleT.Value == true then
-		webhook("╔🛎Пришёл донат!🛎\n║💸 Поднято ⏣: " .. tostring(Players.LocalPlayer.leaderstats.Raised.Value - RaisedC) .. '\n║⏣После комиссии: ' .. tostring(math.floor((Players.LocalPlayer.leaderstats.Raised.Value - RaisedC) * 0.6)) .. 'R$)\n║💸Всего ⏣: ' .. tostring(Players.LocalPlayer.leaderstats.Raised.Value) .. 'R$\n║:bust_in_silhouette:Аккаунт: ' .. Players.LocalPlayer.DisplayName .. ' (' .. Players.LocalPlayer.Name .. ')' ..'\n╚:beginner:Версия скрипта :'..version11)
+		webhook("╔🛎Пришёл донат!🛎\n║💸 Поднято ⏣: " .. tostring(Players.LocalPlayer.leaderstats.Raised.Value - RaisedC) .. '\n║⏣После комиссии: ' .. tostring(math.floor((Players.LocalPlayer.leaderstats.Raised.Value - RaisedC) * 0.6)) .. 'R$\n║💸Всего ⏣: ' .. tostring(Players.LocalPlayer.leaderstats.Raised.Value) .. 'R$\n║:bust_in_silhouette:Аккаунт: ' .. Players.LocalPlayer.DisplayName .. ' (' .. Players.LocalPlayer.Name .. ')' ..'\n╚:beginner:Версия скрипта :'..version11)
 		--webhook(tostring("╔🛎Пришёл донат!🛎\n║💸 Поднято ⏣: " .. tostring(Players.LocalPlayer.leaderstats.Raised.Value - RaisedC) .. '\n║💸Всего ⏣: ' .. tostring(Players.LocalPlayer.leaderstats.Raised.Value) ..'\n╚:bust_in_silhouette:Аккаунт: ' .. Players.LocalPlayer.DisplayName .. ' (' .. Players.LocalPlayer.Name .. ')'))
 	end
 	if Toggles.serverHopAfterDonationTog.Value == true then
