@@ -1,5 +1,5 @@
 repeat wait() until game:IsLoaded()
-version11 = ' v1.5(TEST)'
+version11 = ' v1.2'
 --Stops script if on a different game
 if game.PlaceId ~= 8737602449 and game.PlaceId ~= 8943844393 then
 	return
@@ -271,7 +271,7 @@ end
 
 local queueonteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
 local httpservice = game:GetService('HttpService')
---queueonteleport('https://raw.githubusercontent.com/TpaBaBpyKe/ABH2673test/main/1')
+queueonteleport('https://raw.githubusercontent.com/TpaBaBpyKe/ABH2673test/main/1')
 local repoLib = 'https://raw.githubusercontent.com/wally-rblx/LinoriaLib/main/'
 
 local Library = loadstring(game:HttpGet(repoLib .. 'Library.lua'))()
@@ -279,7 +279,7 @@ local ThemeManager = loadstring(game:HttpGet(repoLib .. 'addons/ThemeManager.lua
 local SaveManager = loadstring(game:HttpGet(repoLib .. 'addons/SaveManager.lua'))()
 
 local Window = Library:CreateWindow({
-    Title = version11..'| TpaBa',
+    Title = 'pls donate v1.2 | TpaBa',
     Center = true, 
     AutoShow = true,
 })
@@ -304,15 +304,12 @@ local infoExpand = Tabs.InfoTab:AddRightGroupbox('')
 
 infoMain:AddLabel('Pls Donate | TpaBa ')
 infoMain:AddLabel('Конфиг сохраняется каждые 10 секунд')
-infoMain:AddLabel('Ник : '..Players.LocalPlayer.Name)
-infoMain:AddLabel('Версия скрипта : '.. version11)
-infoExpand:AddLabel('Кнопка меню(по дефолту) : End')
 
 boothTextSettings:AddInput('boothTextTextbox', {
     Default = "✅ 1 ROBUX DONATED = 1 JUMP ✅",
     Numeric = false, 
     Finished = true,
-    Text = 'Текст на стойке',
+    Text = 'Booth Text',
     Tooltip = '$C = Current / $G = Goal',
     Placeholder = 'A text that shows on your booth',
 })
@@ -328,9 +325,9 @@ boothTextSettings:AddSlider('textUpdateSlider', {
     Compact = false,
 })
 
-boothTextSettings:AddLabel('Цвет текста'):AddColorPicker('textColorPicker', {
+boothTextSettings:AddLabel('Text Color'):AddColorPicker('textColorPicker', {
     Default = Color3.new(0,1,0),
-    Title = 'Цвет текста',
+    Title = 'Text Color',
 })
 
 boothTextSettings:AddDivider()
@@ -364,7 +361,7 @@ Toggles.spinSet:OnChanged(function()
 		Spin.Name = "Spin"
 		Spin.Parent = root
 		Spin.MaxTorque = Vector3.new(0, math.huge, 0)
-		Spin.AngularVelocity = Vector3.new(0, 0.25 * Options.spinSpeeder.Value, 0)
+		Spin.AngularVelocity = Vector3.new(0,0.25,0)
 	elseif valll == false and Players.LocalPlayer.Character.Humanoid.RootPart:FindFirstChild('Spin') then
 		Players.LocalPlayer.Character.Humanoid.RootPart.Spin:Destroy()
 	end
@@ -385,7 +382,7 @@ serverHopSettings:AddToggle('serverHopAfterDonationTog', {
     Tooltip = 'Меняет сервер после доната',
 })
 
-serverHopMain:AddButton('Смена сервера',function()
+serverHopMain:AddButton('ServerHop',function()
 	getgenv().clickSH = true
 	serverHop()
 end)
@@ -417,15 +414,6 @@ serverHopSettings:AddToggle('RandomServersHop', {
 	Text = 'Рандомная смена',
 	Default = false,
 	Tooltip = 'Рандомно меняет сервер между голосовыми и обычными',
-})
-
-serverHopSettings:AddInput('minimumDonated', {
-	Default = "0",
-	Numeric = false,
-	Finished = true,
-	Text = 'Минимум задоначено',
-	Tooltip = 'Меняет сервер если ни у 1 игрока нету минимума доната',
-	Placeholder = 'Минимум задоначено',
 })
 
 miscMain:AddToggle('AutoBegT', {
@@ -537,16 +525,6 @@ if setfpscap and typeof(setfpscap) == 'function' then
 	end)
 end
 
-miscMain:AddSlider('spinSpeeder', {
-	Text = 'Множитель скорости вращения',
-	Default = 1,
-	Min = 1,
-	Max = 3,
-	Rounding = 0,
-	Compact = false,
-})
-
-
 miscMain:AddDivider()
 
 miscMain:AddDropdown('DanceChoiceD', {
@@ -572,12 +550,6 @@ miscMainT:AddToggle('DisableRenderingT', {
 	Text = 'Отключить рендер',
 	Default = false,
 	Tooltip = 'Отключение рендера для снижения нагрузки'
-})
-
-miscMainT:AddToggle('webASH', {
-	Text = 'Вебхук смены сервера',
-	Default = false,
-	Tooltip = 'Присылает уведомление в дискорд после захода на новый сервер'
 })
 
 Toggles.DisableRenderingT:OnChanged(function()
@@ -642,9 +614,9 @@ miscMainT:AddInput('addSignText', {
     Placeholder = 'Текст на табличке',
 })
 
-local MenuGroup = Tabs['UI Settings']:AddLeftGroupbox('Меню')
-MenuGroup:AddButton('Выгрузка', function() Library:Unload() end)
-MenuGroup:AddLabel('Кнопка бинда'):AddKeyPicker('MenuKeybind', { Default = 'End', NoUI = true, Text = 'Бинд меню' }) 
+local MenuGroup = Tabs['UI Settings']:AddLeftGroupbox('Menu')
+MenuGroup:AddButton('Unload', function() Library:Unload() end)
+MenuGroup:AddLabel('Menu bind'):AddKeyPicker('MenuKeybind', { Default = 'End', NoUI = true, Text = 'Menu keybind' }) 
 Library.ToggleKeybind = Options.MenuKeybind 
 ThemeManager:SetLibrary(Library)
 SaveManager:SetLibrary(Library)
@@ -756,15 +728,10 @@ end
 local RaisedC = Players.LocalPlayer.leaderstats.Raised.value
 Players.LocalPlayer.leaderstats.Raised.Changed:Connect(function()
 	hopSet()
-	xspin = (xspin + Players.LocalPlayer.leaderstats.Raised.Value - RaisedC) / 3 * Options.spinSpeeder.Value
+	xspin = (xspin + Players.LocalPlayer.leaderstats.Raised.Value - RaisedC) / 3
 	if Toggles.webhookToggleT.Value == true then
-		local LogService = Game:GetService("LogService")
-		local logs = LogService:GetLogHistory()
-		if string.find(logs[#logs].message, Players.LocalPlayer.DisplayName) then
-			webhook("Пришёл новый донат! \nПоднято: " .. tostring(Players.LocalPlayer.leaderstats.Raised.Value - RaisedC) .. '⏣ (После комиссии: ' .. tostring(math.floor((Players.LocalPlayer.leaderstats.Raised.Value - RaisedC) * 0.6)) .. '⏣) \nВсего: ' .. tostring(Players.LocalPlayer.leaderstats.Raised.Value) .. '⏣ \n:bust_in_silhouette:Аккаунт: ' .. Players.LocalPlayer.DisplayName .. ' (' .. Players.LocalPlayer.Name .. ') \nСообщение сервера: ' .. logs[#logs].message:gsub('', '')'\nТекущая версия скрипта: '..version11)
-		else
-			webhook("Пришёл новый донат! \nПоднято: " .. tostring(Players.LocalPlayer.leaderstats.Raised.Value - RaisedC) .. '⏣ (После комиссии: ' .. tostring(math.floor((Players.LocalPlayer.leaderstats.Raised.Value - RaisedC) * 0.6)) .. '⏣) \nВсего: ' .. tostring(Players.LocalPlayer.leaderstats.Raised.Value) .. '⏣ \n:bust_in_silhouette:Аккаунт: ' .. Players.LocalPlayer.DisplayName .. ' (' .. Players.LocalPlayer.Name .. ') \nНе удалось найти серверное сообщение!' .. '\nТекущая версия скрипта: '..version11)
-		end	
+		webhook("╔🛎Пришёл донат!🛎\n║💸 Поднято ⏣: " .. tostring(Players.LocalPlayer.leaderstats.Raised.Value - RaisedC) .. '\n║⏣После комиссии: ' .. tostring(math.floor((Players.LocalPlayer.leaderstats.Raised.Value - RaisedC) * 0.6)) .. 'R$\n║💸Всего ⏣: ' .. tostring(Players.LocalPlayer.leaderstats.Raised.Value) .. 'R$\n║:bust_in_silhouette:Аккаунт: ' .. Players.LocalPlayer.DisplayName .. ' (' .. Players.LocalPlayer.Name .. ')' ..'\n╚:beginner:Версия скрипта :'..version11)
+		--webhook(tostring("╔🛎Пришёл донат!🛎\n║💸 Поднято ⏣: " .. tostring(Players.LocalPlayer.leaderstats.Raised.Value - RaisedC) .. '\n║💸Всего ⏣: ' .. tostring(Players.LocalPlayer.leaderstats.Raised.Value) ..'\n╚:bust_in_silhouette:Аккаунт: ' .. Players.LocalPlayer.DisplayName .. ' (' .. Players.LocalPlayer.Name .. ')'))
 	end
 	if Toggles.serverHopAfterDonationTog.Value == true then
 		task.spawn(function()
@@ -773,7 +740,7 @@ Players.LocalPlayer.leaderstats.Raised.Changed:Connect(function()
 	end
 	if Players.LocalPlayer.Character.Humanoid.RootPart:FindFirstChild('Spin') and Toggles.spinSet.Value == true then
 		local spin = Players.LocalPlayer.Character.Humanoid.RootPart:FindFirstChild('Spin')
-		spin.AngularVelocity = Vector3.new(0, xspin, 0)
+		spin.AngularVelocity = Vector3.new(0,xspin,0)
 	end
 	if Toggles.donationJumpToggle.Value == true and Toggles.spinSet.Value == false then
 		task.spawn(function()
@@ -808,40 +775,22 @@ update()
 task.spawn(function()
 	task.wait(5)
 	Players.LocalPlayer.CharacterRemoving:Connect(function()
-		if Toggles.spinSet.Value == true then
+		if getgenv().settings.spinSet then
 			serverHop()
 		end
 	end)
-	for i,v in next, Players:GetPlayers() do
-		if v:FindFirstChild('leaderstats') and v ~= Players.LocalPlayer then
-			if raisedV ~= nil then
-				if v.leaderstats.Raised.Value > raisedV then
-					raisedV = v.leaderstats.Raised.Value
-				end
-			else
-				raisedV = v.leaderstats.Raised.Value
-			end
-		end
-	end
-	if raisedV < Options.minimumDonated.Value then
-		serverHop()
-	end
 end)
 
 task.spawn(function()
 	while task.wait(5) do
 		if (Players.LocalPlayer.Character and Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').RootPart) then
 			local root = Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').RootPart
-			if (root.Position - positionX.Position).Magnitude > 1500 or (root.Position - positionX.Position).Magnitude < -1500 then
+			if (root.Position - positionX.Position).Magnitude > 1000 or (root.Position - positionX.Position).Magnitude < -1000 then
 				serverHop()
 			end
 		end
 	end
 end)
-
-if Toggles.webASH.Value == true then
-	webhook('Аккаунт ' .. Players.LocalPlayer.DisplayName .. ' (' .. Players.LocalPlayer.Name .. ') зашёл на новый сервер!')
-end
 
 local msgdone = game:GetService('ReplicatedStorage').DefaultChatSystemChatEvents.OnMessageDoneFiltering
 local randommsgs = {
